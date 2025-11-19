@@ -1,0 +1,26 @@
+<nav class="w-full bg-blue-900 text-white flex items-center justify-between px-6 py-4 shadow-lg">
+    <div class="flex items-center space-x-8">
+        <h1 class="text-xl font-semibold">
+            Inventory Management
+        </h1>
+
+        <!-- other features -->
+         <div class="flex-items-center space-x-6 text-sm">
+
+            <!-- homepage button -->
+             <button class="px-3 py-1 rounded-md">Home </button>
+             <!-- <button class="text-semibold">Total Products</button> -->
+              <!-- Total Product Page -->
+               <button (click)="goToTotalProduct()">Total Product</button>
+             <button class="text-semibold">Low Stock Items</button>
+             <button class="text-semibold">Pending Orders</button>
+             <button class="text-semibold">Order In Progress</button>
+             <button class="text-semibold">Order Completed</button>
+         </div>
+    </div>
+
+    <!-- Account info -->
+     <div>
+        <span class="text-sm opacity-80">Account</span>
+     </div>
+</nav>
