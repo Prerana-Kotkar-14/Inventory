@@ -1,0 +1,6 @@
+export enum Category{
+    FURNITURE = "FURNITURE",
+    GROCERY = "GROCERY",
+    ELECTRONICS = "ELECTRONICS",
+    CLOTGING = "CLOTGING",
+}
