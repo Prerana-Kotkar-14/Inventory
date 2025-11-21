@@ -1,3 +1,6 @@
+import { Category } from "./Category.enum";
+import { SupplierName } from "./SupplierName.enum";
+
 export interface Item{
     id: number;
     itemName : string;

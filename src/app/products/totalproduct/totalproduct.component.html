@@ -1,6 +1,20 @@
 
-<div class="p-4 m-4">
-    <h1 class="text-2xl font-semibold mb-8">Total Product</h1>
+<div class="w-full flex justify-between items-center my-6 pr-20">
+    <h1 class="text-2xl font-bold text-blue-900">Total Product</h1>
+
+    <!-- Right Action Button -->
+     <button 
+     class="border border-blue-900 test-blue-890 bg-white px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition"
+     >
+     Add Item
+    </button>
+</div>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    @for(item of items; track item.id)
+    {
+        <app-itemcard [item]="item"></app-itemcard>
+    }
 </div>
 
 <!-- sticky bottom nav bar -->

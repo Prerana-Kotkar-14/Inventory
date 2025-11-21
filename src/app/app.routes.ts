@@ -4,15 +4,15 @@ import { TotalproductComponent } from './products/totalproduct/totalproduct.comp
 
 export const routes: Routes = [
     {
+        path:'',
+        component:HomepageComponent
+    },
+    {
         path:'homepage',
         component: HomepageComponent
     },
     {
         path:'totalproduct',
         component:TotalproductComponent
-    },
-    {
-        path:'',
-        component:HomepageComponent
     },
 ];
