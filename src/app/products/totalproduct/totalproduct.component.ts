@@ -1,13 +1,14 @@
-import { Component, inject, InjectionToken, OnInit } from '@angular/core';
+import { Component, inject, InjectionToken, OnInit, signal} from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemService } from '../../services/ItemService.service';
 import { Item } from '../../model/items.model';
 import { ItemcardComponent } from '../../core/modal/itemcard/itemcard.component';
+import { AddItemModalComponent } from '../addItemModal/addItemModal.component';
 
 @Component({
   selector: 'app-totalproduct',
   standalone: true,
-  imports: [ItemcardComponent],
+  imports: [ItemcardComponent, AddItemModalComponent],
   templateUrl: './totalproduct.component.html',
   styleUrl: './totalproduct.component.css'
 })
@@ -16,7 +17,9 @@ export class TotalproductComponent implements OnInit{
   private router = inject(Router);
   private itemService = inject(ItemService);
 
-  items: Item[] = []
+  items: Item[] = [];
+
+  isAddItemModalOpen = signal(false);
 
   ngOnInit() {
       this.itemService.getAllItems().subscribe(data => {
@@ -27,5 +30,17 @@ export class TotalproductComponent implements OnInit{
   goBack()
   {
     this.router.navigate(['/homepage']);
+  }
+
+  openAddItemModal(){
+    this.isAddItemModalOpen.set(true);
+    console.log("modal Opens")
+    console.log('signal : ',this.isAddItemModalOpen());
+    document.body.style.overflow='hidden';
+  }
+
+  closeAddItemModal(){
+    this.isAddItemModalOpen.set(false);
+    document.body.style.overflow = 'auto';
   }
 }
