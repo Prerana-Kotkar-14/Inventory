@@ -6,7 +6,7 @@ export interface Item{
     itemName : string;
     price : number;
     category: Category;
-    description: string;
+    description?: string;
     supplierName: SupplierName;
     createdAt:string;
     updatedAt:string;

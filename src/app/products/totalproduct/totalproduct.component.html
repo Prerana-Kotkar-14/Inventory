@@ -15,17 +15,21 @@
 {
     <app-add-item-modal
     (close)="closeAddItemModal()"
+    (save)="loadItems()"
     ></app-add-item-modal>
 }
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    @for(item of items; track item.id)
+    @for(item of items(); track item.id)
     {
         <app-itemcard [item]="item"></app-itemcard>
     }
 </div>
 
 <!-- sticky bottom nav bar -->
-<div class="fixed bottom-0 left-0 w-full bg-white-900 border-t p-4 justify-start">
-    <button (click)="goBack()" class="px-4 py-2 text-blue-400 hover:text-blue-600">Cancel</button>
-</div>
+
+@if(!isAddItemModalOpen()){
+    <div class="fixed bottom-0 left-0 w-full bg-white border-t p-4 justify-start z-50">
+        <button (click)="goBack()" class="px-4 py-2 text-blue-400 hover:text-blue-600">Cancel</button>
+    </div>
+}

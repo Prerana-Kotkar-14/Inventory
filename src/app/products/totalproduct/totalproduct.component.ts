@@ -17,13 +17,13 @@ export class TotalproductComponent implements OnInit{
   private router = inject(Router);
   private itemService = inject(ItemService);
 
-  items: Item[] = [];
+  items= signal<Item[]>([])
 
   isAddItemModalOpen = signal(false);
 
   ngOnInit() {
       this.itemService.getAllItems().subscribe(data => {
-        this.items=data;
+        this.items.set(data);
       })
   }
 
@@ -42,5 +42,11 @@ export class TotalproductComponent implements OnInit{
   closeAddItemModal(){
     this.isAddItemModalOpen.set(false);
     document.body.style.overflow = 'auto';
+  }
+
+  loadItems(){
+    this.itemService.getAllItems().subscribe(res => {
+      this.items.set(res);
+    })
   }
 }
