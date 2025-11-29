@@ -17,9 +17,9 @@ export class TotalproductComponent implements OnInit{
   private router = inject(Router);
   private itemService = inject(ItemService);
 
-  items= signal<Item[]>([])
+  items= signal<Item[]>([]);
 
-  isAddItemModalOpen = signal(false);
+  isModalOpen = signal(false);
 
   ngOnInit() {
       this.itemService.getAllItems().subscribe(data => {
@@ -27,15 +27,14 @@ export class TotalproductComponent implements OnInit{
       })
   }
 
+  openModal(){
+    this.isModalOpen.set(true);
+    console.log("Calling the openModal from add item Selector : ",this.isModalOpen());
+  }
+
   goBack()
   {
     this.router.navigate(['/homepage']);
-  }
-
-  openAddItemModal(){
-    this.isAddItemModalOpen.set(true);
-    console.log("modal Opens")
-    console.log('signal : ',this.isAddItemModalOpen());
   }
 
   loadItems(){

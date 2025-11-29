@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, input, Output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { categoriesService } from '../../services/categories.service';
 import { SuppliersService } from '../../services/suppliers.service';
@@ -6,7 +6,7 @@ import { ItemService } from '../../services/ItemService.service';
 import { SupplierName } from '../../model/SupplierName.enum';
 import { Category } from '../../model/Category.enum';
 import { Item } from '../../model/items.model';
-import { AddEditModalComponent } from '../../core/modal/add-edit-modal/add-edit-modal.component'; 
+import { AddEditModalComponent } from '../../core/modal/add-edit-modal/add-edit-modal.component';
 
 @Component({
   selector: 'app-add-item-modal',
@@ -21,18 +21,21 @@ export class AddItemModalComponent {
   private suplierService = inject(SuppliersService);
   private itemService = inject(ItemService);
 
-    // @Output() close = new EventEmitter<void>();
-    // @Output() save = new EventEmitter<void>();
-
-    // isOpenModal = input.required<true | false>();
+  closeModalForParent = output<void>();
 
     showModal = signal(true);
-    suppliers=signal<SupplierName[]>([]);
+    suppliers = signal<SupplierName[]>([]);
     category = signal<Category[]>([]);
+
+    consoleMsg()
+    {
+      console.log("Modal called");
+    }
 
   ngOnInit(){
     this.loadCategories();
     this.loadSuppliers();
+    console.log("Add item modal called");
   }
 
   loadSuppliers(){
@@ -47,25 +50,15 @@ export class AddItemModalComponent {
     });
   }
 
-  openModal(){
-    this.showModal.set(true);
-  }
-
-  closeModal(){
-    // this.showModal.set(false);
-    this.showModal.set(false);
-  }
-
-  // isOpen = signal(false);
-
-  // closeModal(){
-  //   this.close.emit();
-  // }
-
   saveItem(data : Item){
     this.itemService.saveItem(data).subscribe({
       next: () => this.showModal.set(false),
       error: (err) => console.error('Failed to save item : ',err)
     });
+  }
+
+  closeModal(){
+    this.showModal.set(false);
+    this.closeModalForParent.emit();
   }
 }

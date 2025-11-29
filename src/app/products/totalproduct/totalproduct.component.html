@@ -5,19 +5,11 @@
     <!-- Right Action Button -->
      <button 
      class="border border-blue-900 test-blue-890 bg-white px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition"
-     (click)="openAddItemModal()"
+     (click)="openModal()"
      >
      Add Item
     </button>
 </div>
-
-@if(isAddItemModalOpen())
-{
-    <app-add-item-modal
-        [isOpenModal]="isAddItemModalOpen()"
-    >
-    </app-add-item-modal>
-}
 
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     @for(item of items(); track item.id)
@@ -26,9 +18,15 @@
     }
 </div>
 
+@if(isModalOpen())
+{
+    openModal();
+    <app-add-item-modal></app-add-item-modal>
+}
+
 <!-- sticky bottom nav bar -->
 
-@if(!isAddItemModalOpen()){
+@if(!isModalOpen()){
     <div class="fixed bottom-0 left-0 w-full bg-white border-t p-4 justify-start z-50">
         <button (click)="goBack()" class="px-4 py-2 text-blue-400 hover:text-blue-600">Cancel</button>
     </div>

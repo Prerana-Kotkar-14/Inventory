@@ -6,6 +6,8 @@
     [suppliers]="suppliers()"
     [category] = "category()"
     (save)="saveItem($event)"
-    (onCancel)="closeModal()"
+    (cancel)="closeModal()"
     ></app-add-edit-modal>
 }
+
+consoleMsg();
