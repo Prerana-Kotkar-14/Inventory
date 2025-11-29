@@ -36,12 +36,6 @@ export class TotalproductComponent implements OnInit{
     this.isAddItemModalOpen.set(true);
     console.log("modal Opens")
     console.log('signal : ',this.isAddItemModalOpen());
-    document.body.style.overflow='hidden';
-  }
-
-  closeAddItemModal(){
-    this.isAddItemModalOpen.set(false);
-    document.body.style.overflow = 'auto';
   }
 
   loadItems(){

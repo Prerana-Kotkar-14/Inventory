@@ -1,12 +1,13 @@
 import { Component, effect, inject, input, output } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { SupplierName } from '../../../model/SupplierName.enum';
 import { Category } from '../../../model/Category.enum';
+import { AddItemModalComponent } from '../../../products/addItemModal/addItemModal.component';
 
 @Component({
   selector: 'app-add-edit-modal',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, AddItemModalComponent],
   templateUrl: './add-edit-modal.component.html',
   styleUrl: './add-edit-modal.component.css'
 })
@@ -31,6 +32,7 @@ export class AddEditModalComponent {
   });
 
   constructor() {
+    console.log("generic modal");
     
     effect(() => {
       const modeValue = this.mode();

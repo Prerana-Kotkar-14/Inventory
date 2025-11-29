@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, input, Output, signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { categoriesService } from '../../services/categories.service';
 import { SuppliersService } from '../../services/suppliers.service';
@@ -24,7 +24,9 @@ export class AddItemModalComponent {
     // @Output() close = new EventEmitter<void>();
     // @Output() save = new EventEmitter<void>();
 
-    showModal = signal(false);
+    // isOpenModal = input.required<true | false>();
+
+    showModal = signal(true);
     suppliers=signal<SupplierName[]>([]);
     category = signal<Category[]>([]);
 
@@ -50,6 +52,7 @@ export class AddItemModalComponent {
   }
 
   closeModal(){
+    // this.showModal.set(false);
     this.showModal.set(false);
   }
 

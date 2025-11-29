@@ -2,10 +2,10 @@
 @if(showModal()){
     <app-add-edit-modal
     [mode]="'add'"
-    [itemDate]="{}"
-    [suppliers]="suppliers"
-    [category] = "category"
-    (submit)="saveItem($event)"
+    [itemData]="{}"
+    [suppliers]="suppliers()"
+    [category] = "category()"
+    (save)="saveItem($event)"
     (onCancel)="closeModal()"
     ></app-add-edit-modal>
 }
