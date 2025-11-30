@@ -5,7 +5,7 @@
     <!-- Right Action Button -->
      <button 
      class="border border-blue-900 test-blue-890 bg-white px-4 py-2 rounded-md font-medium hover:bg-blue-50 transition"
-     (click)="openModal()"
+     (click)="openAddModal()"
      >
      Add Item
     </button>
@@ -14,20 +14,29 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
     @for(item of items(); track item.id)
     {
-        <app-itemcard [item]="item"></app-itemcard>
+        <app-itemcard 
+        [item]="item"
+        (editRequested)="openEditModal($event)"
+        ></app-itemcard>
     }
 </div>
 
-@if(isModalOpen())
+@if(isAnyModalOpen())
 {
-    openModal();
-    <app-add-item-modal></app-add-item-modal>
+    <app-add-edit-modal
+        [mode]="modalMode()"
+        [itemData]="selectedItem()"
+        [suppliers]="suppliers()"
+        [category]="categories()"
+        (save)="saveItem($event)"
+        (cancel)="closeModal()"
+    ></app-add-edit-modal>
 }
 
 <!-- sticky bottom nav bar -->
 
-@if(!isModalOpen()){
-    <div class="fixed bottom-0 left-0 w-full bg-white border-t p-4 justify-start z-50">
+@if(!isAnyModalOpen()){
+    <div class="sticky bottom-0 left-0 w-full bg-white border-t p-4 justify-start z-50">
         <button (click)="goBack()" class="px-4 py-2 text-blue-400 hover:text-blue-600">Cancel</button>
     </div>
 }

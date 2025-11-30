@@ -1,13 +1,13 @@
 import { Component, effect, inject, input, output } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SupplierName } from '../../../model/SupplierName.enum';
 import { Category } from '../../../model/Category.enum';
-import { AddItemModalComponent } from '../../../products/addItemModal/addItemModal.component';
+import { Item } from '../../../model/items.model';
 
 @Component({
   selector: 'app-add-edit-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, AddItemModalComponent],
+  imports: [ReactiveFormsModule],
   templateUrl: './add-edit-modal.component.html',
   styleUrl: './add-edit-modal.component.css'
 })
@@ -20,7 +20,7 @@ export class AddEditModalComponent {
   suppliers = input.required<SupplierName[]>();
   category = input.required<Category[]>();
 
-  save = output<any>();
+  save = output<Item>();
   cancel= output<void>();
 
   itemForm = this.formBuilder.group({
@@ -35,21 +35,19 @@ export class AddEditModalComponent {
     console.log("generic modal");
     
     effect(() => {
-      const modeValue = this.mode();
-      const dataValue = this.itemData();
 
-      if(modeValue==='edit' && dataValue){
-        this.itemForm.patchValue(dataValue);
+      if(this.mode() ==='edit' && this.itemData()){
+        this.itemForm.patchValue(this.itemData()!);
       }
-
-      if(modeValue==='add'){
+      else{
         this.itemForm.reset();
       }
     });
   }
 
   submit(){
-    this.save.emit(this.itemForm.value);
+    if(this.itemForm.invalid) return;
+    this.save.emit(this.itemForm.value as Item);
   }
 
   onCancel(){

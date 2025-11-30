@@ -20,4 +20,13 @@ export class ItemService {
     saveItem(item:Item){
         return this.http.post<Item>(getUrl('items/add'),item);
     }
+
+    getItemById(id:number)
+    {
+        return this.http.get<Item>(getUrl(`items/${id}`));
+    }
+
+    updateItem(id:number, data:Partial<Item>){
+        return this.http.patch<Item>(getUrl(`items/${id}`),data);
+    }
 }
