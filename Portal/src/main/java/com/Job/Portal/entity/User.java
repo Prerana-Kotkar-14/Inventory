@@ -1,12 +1,19 @@
-import java.time.LocalDateTime;
+package com.Job.Portal.entity;
 
-@Entity
-@Table(name = "users")
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+//import org.springframework.data.annotation.Id;
+
+import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id

@@ -1,6 +1,8 @@
+package com.Job.Portal.service;
+
+import com.Job.Portal.dto.UserResponseDTO;
 
 public interface UserService {
-    User registerUser(User user);
 
-    User getUserByEmail(String email);
+    UserResponseDTO loginUser(String email, String password);
 }
